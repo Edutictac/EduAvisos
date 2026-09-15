@@ -196,6 +196,21 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
         <div id="classHistoryEmpty" class="empty" hidden data-i18n="classHistory.empty">Esta clase aún no tiene puntos en el histórico.</div>
       </dialog>
 
+      <dialog id="iosInstallDialog" class="modal" aria-labelledby="iosInstallDialogTitle">
+        <div class="modal__header">
+          <h3 id="iosInstallDialogTitle" class="modal__title" data-i18n="app.install.ios.title">Instalar en tu iPad/iPhone</h3>
+          <button id="closeIosInstallBtn" class="btn btn--secondary" type="button" data-i18n="action.close">Cerrar</button>
+        </div>
+
+        <p class="modal__subtitle" data-i18n="app.install.ios.subtitle">Safari no permite instalar apps automáticamente, pero puedes añadir un acceso directo en unos segundos:</p>
+
+        <ol>
+          <li data-i18n="app.install.ios.step1">Toca el icono Compartir (el cuadrado con la flecha hacia arriba) en la barra de Safari.</li>
+          <li data-i18n="app.install.ios.step2">Desplázate y elige "Añadir a pantalla de inicio".</li>
+          <li data-i18n="app.install.ios.step3">Confirma pulsando "Añadir". El icono aparecerá en tu pantalla de inicio.</li>
+        </ol>
+      </dialog>
+
       <section class="panel" aria-labelledby="listTitle">
         <div class="panel__header">
           <div class="panel__headerRow">
@@ -514,34 +529,56 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
           });
         }
 
-        // Botón "Instalar app": Chrome/Edge disparan beforeinstallprompt
-        // cuando la PWA cumple los requisitos; hace falta un gesto del
-        // usuario para llamar a prompt(), así que mostramos un botón.
+        // Botón "Instalar app": en Chrome/Edge dispara el prompt nativo
+        // (beforeinstallprompt); en iOS/Safari, que no tiene esa API, abre
+        // un diálogo con los pasos manuales para "Añadir a pantalla de inicio".
         const installBtn = document.getElementById("installAppBtn");
+        const iosInstallDialog = document.getElementById("iosInstallDialog");
+        const closeIosInstallBtn = document.getElementById("closeIosInstallBtn");
         let deferredPrompt = null;
 
         const isStandalone =
           window.matchMedia("(display-mode: standalone)").matches ||
           window.navigator.standalone === true;
 
+        const isIOS =
+          /iP(hone|od|ad)/.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
         if (installBtn && !isStandalone) {
-          window.addEventListener("beforeinstallprompt", (event) => {
-            event.preventDefault();
-            deferredPrompt = event;
+          if (isIOS) {
             installBtn.hidden = false;
-          });
+          } else {
+            window.addEventListener("beforeinstallprompt", (event) => {
+              event.preventDefault();
+              deferredPrompt = event;
+              installBtn.hidden = false;
+            });
+          }
 
           installBtn.addEventListener("click", async () => {
-            if (!deferredPrompt) return;
-            installBtn.hidden = true;
-            deferredPrompt.prompt();
-            await deferredPrompt.userChoice;
-            deferredPrompt = null;
+            if (deferredPrompt) {
+              installBtn.hidden = true;
+              deferredPrompt.prompt();
+              await deferredPrompt.userChoice;
+              deferredPrompt = null;
+              return;
+            }
+            if (isIOS && iosInstallDialog?.showModal) {
+              iosInstallDialog.showModal();
+            }
           });
 
           window.addEventListener("appinstalled", () => {
             installBtn.hidden = true;
             deferredPrompt = null;
+          });
+        }
+
+        if (closeIosInstallBtn && iosInstallDialog) {
+          closeIosInstallBtn.addEventListener("click", () => iosInstallDialog.close());
+          iosInstallDialog.addEventListener("click", (event) => {
+            if (event.target === iosInstallDialog) iosInstallDialog.close();
           });
         }
       })();
