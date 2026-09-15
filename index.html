@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="app.title">EduAvisos</title>
 
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0b1020" />
+    <link rel="icon" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="EduAvisos" />
+
     <!-- Anti-caché (útil en desarrollo con http.server / recargas) -->
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -49,6 +56,8 @@
 
           <button id="timerPlayBtn" class="btn btn--secondary iconBtn" type="button" aria-label="Iniciar/Reanudar tiempo" title="Play" data-i18n-attr="aria-label:app.timer.play|title:app.timer.play.title">▶︎</button>
           <button id="timerPauseBtn" class="btn btn--secondary iconBtn" type="button" aria-label="Pausar tiempo" title="Pausa" data-i18n-attr="aria-label:app.timer.pause|title:app.timer.pause.title">⏸</button>
+
+          <button id="installAppBtn" class="btn btn--secondary iconBtn" type="button" hidden aria-label="Instalar aplicación" title="Instalar app" data-i18n-attr="aria-label:app.install|title:app.install.title">⬇︎</button>
 
           <button id="openImportBtn" class="btn iconBtn" type="button" aria-label="Abrir configuración" title="Configuración" data-i18n-attr="aria-label:app.settings.open|title:app.settings.title">⚙︎</button>
         </div>
@@ -484,6 +493,50 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
           document.body.appendChild(s);
         };
         document.body.appendChild(i);
+      })();
+    </script>
+
+    <script>
+      (function () {
+        // Registro del Service Worker (instalable + offline).
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+            navigator.serviceWorker.register("sw.js").catch((err) => {
+              console.error("No se pudo registrar el service worker", err);
+            });
+          });
+        }
+
+        // Botón "Instalar app": Chrome/Edge disparan beforeinstallprompt
+        // cuando la PWA cumple los requisitos; hace falta un gesto del
+        // usuario para llamar a prompt(), así que mostramos un botón.
+        const installBtn = document.getElementById("installAppBtn");
+        let deferredPrompt = null;
+
+        const isStandalone =
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone === true;
+
+        if (installBtn && !isStandalone) {
+          window.addEventListener("beforeinstallprompt", (event) => {
+            event.preventDefault();
+            deferredPrompt = event;
+            installBtn.hidden = false;
+          });
+
+          installBtn.addEventListener("click", async () => {
+            if (!deferredPrompt) return;
+            installBtn.hidden = true;
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+          });
+
+          window.addEventListener("appinstalled", () => {
+            installBtn.hidden = true;
+            deferredPrompt = null;
+          });
+        }
       })();
     </script>
   </body>
