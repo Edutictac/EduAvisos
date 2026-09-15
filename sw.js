@@ -7,15 +7,17 @@
 // string (`ignoreSearch`) para que el fallback offline sí encuentre el
 // recurso precacheado.
 //
-// Sube CACHE_NAME (p. ej. "eduavisos-v2") si necesitas que los usuarios que
-// están offline reciban un cambio importante en cuanto vuelvan a tener red;
-// los que están online ya reciben la última versión en cada carga.
-const CACHE_NAME = "eduavisos-v1";
+// Sube el valor en sw-version.js (p. ej. "eduavisos-v2") si necesitas que los
+// usuarios que están offline reciban un cambio importante en cuanto vuelvan a
+// tener red; los que están online ya reciben la última versión en cada carga.
+importScripts("sw-version.js");
+const CACHE_NAME = EDUAVISOS_SW_VERSION;
 
 const PRECACHE_URLS = [
   "./",
   "index.html",
   "manifest.json",
+  "sw-version.js",
   "css/styles.css",
   "js/i18n.js",
   "js/app.js",

@@ -177,7 +177,7 @@ La app es instalable y funciona sin conexión tras la primera carga:
 - **Instalar**: en Chrome/Edge aparece el botón "Instalar app" en la cabecera (o el icono de instalación en la barra de direcciones) en cuanto el navegador confirma que cumple los requisitos. En iOS/Safari no hay aviso automático: usa "Compartir → Añadir a pantalla de inicio".
 - **Sin conexión**: el Service Worker (`sw.js`) guarda en caché el HTML, CSS, JS e iconos. Estando online siempre se sirve la versión más reciente (network-first); si no hay red, se sirve la última copia cacheada.
 - **Requisito**: el Service Worker solo funciona en `https://` o en `localhost` (por eso `python3 -m http.server` sirve para probarlo en local).
-- **Forzar actualización a usuarios offline**: si despliegas un cambio importante y quieres que quien esté sin conexión lo reciba en cuanto vuelva a tener red, sube el número de `CACHE_NAME` en `sw.js` (p. ej. `eduavisos-v1` → `eduavisos-v2`). Quien esté online ya recibe la última versión en cada carga sin necesidad de tocar nada.
+- **Forzar actualización a usuarios offline**: si despliegas un cambio importante y quieres que quien esté sin conexión lo reciba en cuanto vuelva a tener red, sube el valor de `EDUAVISOS_SW_VERSION` en `sw-version.js` (p. ej. `eduavisos-v1` → `eduavisos-v2`). Quien esté online ya recibe la última versión en cada carga sin necesidad de tocar nada. Esta versión también se muestra en el pie de página de la app.
 
 ## Estructura de archivos
 
@@ -187,6 +187,7 @@ La app es instalable y funciona sin conexión tras la primera carga:
 - `js/app.js`: lógica principal
 - `manifest.json`: metadatos de instalación (PWA)
 - `sw.js`: Service Worker (caché offline)
+- `sw-version.js`: versión de caché del Service Worker (fuente única, usada por `sw.js` y mostrada en el pie de página)
 - `icons/`: iconos de la app (192/512/maskable/apple-touch-icon)
 
 ## Mantenimiento

@@ -479,6 +479,7 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
     <footer class="footer">
       <div class="container footer__row">
         <span class="muted" data-i18n="footer.data">Datos guardados en tu navegador (localStorage).</span>
+        <span class="muted" id="swVersionLabel"></span>
       </div>
     </footer>
 
@@ -496,8 +497,14 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
       })();
     </script>
 
+    <script src="sw-version.js"></script>
     <script>
       (function () {
+        const versionLabel = document.getElementById("swVersionLabel");
+        if (versionLabel && typeof EDUAVISOS_SW_VERSION !== "undefined") {
+          versionLabel.textContent = `SW: ${EDUAVISOS_SW_VERSION}`;
+        }
+
         // Registro del Service Worker (instalable + offline).
         if ("serviceWorker" in navigator) {
           window.addEventListener("load", () => {
