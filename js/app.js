@@ -1225,7 +1225,7 @@ function addPhraseCategory() {
 function exportBackup() {
   const raw = localStorage.getItem(APP_KEY);
   const payload = {
-    app: "EduAvisos",
+    app: "Semàfor",
     version: 1,
     exportedAt: new Date().toISOString(),
     appKey: APP_KEY,
@@ -1233,7 +1233,7 @@ function exportBackup() {
   };
   const json = JSON.stringify(payload, null, 2);
   const ts = new Date().toISOString().replace(/[:.]/g, "-");
-  downloadTextFile(`eduavisos-backup-${ts}.json`, json, "application/json;charset=utf-8");
+  downloadTextFile(`semafor-backup-${ts}.json`, json, "application/json;charset=utf-8");
   setTransientStatus(t("status.backup.exported"));
 }
 
@@ -2073,7 +2073,7 @@ function exportEvaluationsToCsv() {
     .map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, "\"\"")}"`).join(","))
     .join("\n");
   const ts = new Date().toISOString().replace(/[:.]/g, "-");
-  downloadTextFile(`eduavisos-evaluacion-${ts}.csv`, `\uFEFF${csv}`, "text/csv;charset=utf-8");
+  downloadTextFile(`semafor-evaluacion-${ts}.csv`, `\uFEFF${csv}`, "text/csv;charset=utf-8");
   saveState(state);
   setTransientStatus(t("eval.status.exported"));
 }
@@ -3508,7 +3508,7 @@ function initColumnVisibility() {
   if (!leftBtn || !midBtn || !evalBtn || !rightBtn) return;
 
   /** @type {{ left: boolean, mid: boolean, eval: boolean, mode: boolean }} */
-  let vis = { left: true, mid: true, eval: true, mode: true };
+  let vis = { left: false, mid: true, eval: false, mode: false };
 
   function load() {
     const raw = localStorage.getItem(COLVIS_KEY);
@@ -3585,6 +3585,21 @@ function initColumnVisibility() {
     save();
   });
 
+  const projectBtn = document.getElementById("projectSemaphoreBtn");
+  if (projectBtn) {
+    projectBtn.addEventListener("click", () => {
+      const projecting = split.classList.toggle("split--project");
+      projectBtn.setAttribute("aria-pressed", String(projecting));
+    });
+    // Al elegir otra vista se vuelve a la distribución habitual.
+    [leftBtn, midBtn, evalBtn, rightBtn].forEach((button) => {
+      button.addEventListener("click", () => {
+        split.classList.remove("split--project");
+        projectBtn.setAttribute("aria-pressed", "false");
+      });
+    });
+  }
+
   load();
   ensureAtLeastOneVisible();
   apply();
@@ -3595,7 +3610,7 @@ function initColumnResizers() {
   if (!split) return;
 
   /** @type {{ left: number, mid: number, right: number }} */
-  let weights = { left: 2, mid: 1, right: 1 };
+  let weights = { left: 1, mid: 2, right: 1 };
 
   function load() {
     const raw = localStorage.getItem(COLW_KEY);

@@ -1,6 +1,6 @@
-# EduAvisos (HTML5)
+# Semàfor (HTML5)
 
-App web local para gestionar alumnado por clase, avisos de aula y comentarios de evaluación rápidos, sin backend.
+Semàfor de sonido para el aula, instalable y sin backend. Ayuda a visualizar el nivel de ruido y conserva las herramientas de alumnado, avisos y evaluación.
 
 ## Ejecución
 
@@ -21,8 +21,11 @@ Luego abre:
 
 ## Qué hace
 
-La app incluye dos bloques principales:
+La app abre con el semáforo como vista principal. El botón «Proyectar el semáforo» muestra las luces en grande y oculta los ajustes; al desactivarlo recuperas la vista anterior. Las preferencias de vista existentes se respetan.
 
+La app incluye:
+
+- semáforo de sonido con micrófono, calibración y vista para proyectar
 - gestión de clases y alumnado
 - generación rápida de comentarios de evaluación
 

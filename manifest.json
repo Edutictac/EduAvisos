@@ -1,8 +1,8 @@
 {
-  "name": "EduAvisos",
-  "short_name": "EduAvisos",
-  "description": "Gestión de alumnado por clase, avisos de aula y comentarios de evaluación rápidos, sin backend.",
-  "lang": "es",
+  "name": "Semàfor",
+  "short_name": "Semàfor",
+  "description": "Semàfor de soroll per a l’aula, amb gestió d’alumnat i comentaris d’avaluació. Funciona en local i sense connexió.",
+  "lang": "ca",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

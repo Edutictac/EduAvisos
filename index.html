@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title data-i18n="app.title">EduAvisos</title>
+    <title data-i18n="app.title">Semàfor</title>
 
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#0b1020" />
     <link rel="icon" href="icons/icon-192.png" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="EduAvisos" />
+    <meta name="apple-mobile-web-app-title" content="Semàfor" />
 
     <!-- Anti-caché (útil en desarrollo con http.server / recargas) -->
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
@@ -33,8 +33,9 @@
   <body>
     <header class="header">
       <div class="container header__row">
-        <h1 class="title" data-i18n="app.title">EduAvisos</h1>
+        <div class="brand"><h1 class="title" data-i18n="app.title">Semàfor</h1><p class="brand__subtitle" data-i18n="app.subtitle">Un semàfor per cuidar el soroll de l’aula</p></div>
         <div class="controls">
+          <button id="projectSemaphoreBtn" class="btn" type="button" aria-pressed="false" data-i18n="app.project">Projectar el semàfor</button>
           <div class="viewToggles" aria-label="Vista" data-i18n-attr="aria-label:app.view">
             <span class="field__label" data-i18n="app.view">Vista</span>
             <div class="viewToggles__buttons" role="group" aria-label="Mostrar u ocultar columnas" data-i18n-attr="aria-label:app.view.toggles">
@@ -258,7 +259,7 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
                 <h2 id="soundTitle" class="panel__title" data-i18n="sound.title">Semáforo de sonido</h2>
                 <div class="soundHeaderBtns">
                   <button id="soundToggleConfigBtn" class="btn btn--secondary" type="button" data-i18n="sound.toggle.hide">Ocultar configuración</button>
-                  <button id="soundEnableBtn" class="btn btn--secondary" type="button" data-i18n="sound.button.enable">Activar</button>
+                  <button id="soundEnableBtn" class="btn" type="button" data-i18n="sound.button.enable">Activar</button>
                 </div>
               </div>
               <p id="soundStatusText" class="panel__subtitle" aria-live="polite" data-i18n="sound.status.initial">Pulsa “Activar” y permite el micrófono.</p>

@@ -4,7 +4,9 @@
 
   const I18N = {
     es: {
-      "app.title": "EduAvisos",
+      "app.title": "Semàfor",
+      "app.subtitle": "Un semáforo para cuidar el ruido del aula",
+      "app.project": "Proyectar el semáforo",
       "app.view": "Vista",
       "app.view.toggles": "Mostrar u ocultar columnas",
       "app.students": "Alumnos",
@@ -268,7 +270,9 @@
       "class.default": "Clase {index}"
     },
     ca: {
-      "app.title": "EduAvisos",
+      "app.title": "Semàfor",
+      "app.subtitle": "Un semàfor per cuidar el soroll de l’aula",
+      "app.project": "Projectar el semàfor",
       "app.view": "Vista",
       "app.view.toggles": "Mostrar o amagar columnes",
       "app.students": "Alumnes",
@@ -436,7 +440,9 @@
       "class.default": "Classe {index}"
     },
     en: {
-      "app.title": "EduAvisos",
+      "app.title": "Semàfor",
+      "app.subtitle": "A traffic light to manage classroom noise",
+      "app.project": "Project traffic light",
       "app.view": "View",
       "app.view.toggles": "Show or hide columns",
       "app.students": "Students",

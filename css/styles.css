@@ -34,8 +34,8 @@ body {
 
 .split {
   display: grid;
-  --col-left: 2fr;
-  --col-mid: 1fr;
+  --col-left: 1fr;
+  --col-mid: 2fr;
   --col-right: 1fr;
   --resizer-w: 12px;
   grid-template-columns:
@@ -1012,3 +1012,31 @@ body {
     width: 100%;
   }
 }
+
+/* Semàfor: vista principal y proyección para el aula. */
+.brand__subtitle { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.soundPanel { border-color: var(--sound-green); }
+.soundPanel .panel__title { font-size: 22px; }
+.soundHeaderBtns { flex-wrap: wrap; }
+.soundPanel .panel__headerRow { flex-wrap: wrap; }
+.split.split--project { grid-template-columns: 1fr; }
+.split--project .split__left,
+.split--project .split__right,
+.split--project .split__resizer { display: none; }
+.split.split--project .split__mid { display: block; }
+.split--project .soundCalibrate,
+.split--project .soundGain,
+.split--project .soundSliders,
+.split--project .soundThresholds,
+.split--project .soundColors,
+.split--project #soundToggleConfigBtn,
+.split--project .soundReadout { display: none; }
+.split--project .soundBody,
+.split--hide-left.split--hide-right .soundBody { grid-template-columns: 1fr; justify-items: center; }
+.split--project .trafficLight,
+.split--hide-left.split--hide-right .trafficLight { width: min(320px, 100%); }
+.split--project .light,
+.split--hide-left.split--hide-right .light { width: min(170px, 42vw); height: min(170px, 42vw); }
+.split--project .soundBody { min-height: 65vh; }
+.split--project .soundPanel .panel__subtitle { display: block; }
+#projectSemaphoreBtn[aria-pressed="true"] { background: var(--sound-green); color: #0b1020; }
