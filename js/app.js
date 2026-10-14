@@ -3604,16 +3604,60 @@ function initColumnVisibility() {
 
   const projectBtn = document.getElementById("projectSemaphoreBtn");
   if (projectBtn) {
-    projectBtn.addEventListener("click", () => {
-      const projecting = split.classList.toggle("split--project");
+    const root = document.documentElement;
+    const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+    let ownsFullscreen = false;
+
+    function setProjection(projecting) {
+      split.classList.toggle("split--project", projecting);
+      document.body.classList.toggle("is-projecting", projecting);
       projectBtn.setAttribute("aria-pressed", String(projecting));
+      projectBtn.dataset.i18n = projecting ? "app.project.exit" : "app.project";
+      projectBtn.textContent = t(projectBtn.dataset.i18n);
+    }
+
+    async function stopProjection() {
+      setProjection(false);
+      if (fullscreenElement() === root) {
+        const exit = document.exitFullscreen || document.webkitExitFullscreen;
+        try { await exit?.call(document); } catch { /* La vista normal ya está restaurada. */ }
+      }
+      ownsFullscreen = false;
+    }
+
+    projectBtn.addEventListener("click", async () => {
+      if (split.classList.contains("split--project")) {
+        await stopProjection();
+        return;
+      }
+      setProjection(true);
+      const request = root.requestFullscreen || root.webkitRequestFullscreen;
+      if (request) {
+        try {
+          await request.call(root);
+          ownsFullscreen = fullscreenElement() === root;
+        } catch {
+          // En navegadores sin pantalla completa se ocupa toda la ventana.
+        }
+      }
     });
-    // Al elegir otra vista se vuelve a la distribución habitual.
+
+    function onFullscreenChange() {
+      if (fullscreenElement() === root) ownsFullscreen = true;
+      else if (ownsFullscreen) {
+        ownsFullscreen = false;
+        setProjection(false);
+      }
+    }
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && split.classList.contains("split--project")) {
+        void stopProjection();
+      }
+    });
     [leftBtn, midBtn, evalBtn, rightBtn].forEach((button) => {
-      button.addEventListener("click", () => {
-        split.classList.remove("split--project");
-        projectBtn.setAttribute("aria-pressed", "false");
-      });
+      button.addEventListener("click", () => { void stopProjection(); });
     });
   }
 

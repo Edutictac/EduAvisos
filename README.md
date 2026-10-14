@@ -21,7 +21,7 @@ Luego abre:
 
 ## Qué hace
 
-La app abre con el semáforo y el modo de trabajo como vista principal. El botón «Proyectar el semáforo» muestra las luces en grande y oculta los ajustes; al desactivarlo recuperas la vista anterior. Alumnado y Evaluación se activan desde Configuración; la elección se guarda en el navegador.
+La app abre con el semáforo y el modo de trabajo como vista principal. El botón «Proyectar el semáforo» abre la pantalla completa y muestra las luces en grande. «Salir de pantalla completa» o Escape recuperan la vista anterior. Si el navegador no admite pantalla completa, la proyección ocupa la ventana. Alumnado y Evaluación se activan desde Configuración; la elección se guarda en el navegador.
 
 La app incluye:
 

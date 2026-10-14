@@ -4,6 +4,7 @@
 
   const I18N = {
     es: {
+      "app.project.exit": "Salir de pantalla completa",
       "config.panels.hint": "Activa Alumnado o Evaluación si necesitas estas herramientas. La elección se guarda en este navegador.",
       "app.title": "Semàfor",
       "app.subtitle": "Un semáforo para cuidar el ruido del aula",
@@ -275,6 +276,7 @@
       "class.default": "Clase {index}"
     },
     ca: {
+      "app.project.exit": "Eixir de pantalla completa",
       "config.panels.hint": "Activa Alumnat o Avaluació si necessites estes eines. La tria es guarda en este navegador.",
       "app.title": "Semàfor",
       "app.subtitle": "Un semàfor per cuidar el soroll de l’aula",
@@ -450,6 +452,7 @@
       "class.default": "Classe {index}"
     },
     en: {
+      "app.project.exit": "Exit fullscreen",
       "config.panels.hint": "Enable Students or Evaluation when you need these tools. Your choice is saved in this browser.",
       "app.title": "Semàfor",
       "app.subtitle": "A traffic light to manage classroom noise",

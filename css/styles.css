@@ -1060,3 +1060,21 @@ body {
   #splitLayout.split { grid-template-columns: 1fr; }
   #splitLayout .split__resizer { display: none; }
 }
+
+/* Proyección: pantalla completa nativa, con vista de ventana como alternativa. */
+body.is-projecting { position: fixed; inset: 0; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
+.is-projecting .header { flex: 0 0 auto; }
+.is-projecting .header__row { max-width: none; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; padding: 10px 16px; }
+.is-projecting .brand, .is-projecting .controls { display: contents; }
+.is-projecting .brand .title, .is-projecting .brand__subtitle,
+.is-projecting .controls > :not(#projectSemaphoreBtn), .is-projecting .footer { display: none; }
+.is-projecting .micStart { width: auto; min-height: 44px; margin: 0; font-size: 16px; }
+.is-projecting main { flex: 1; min-height: 0; width: 100%; padding: 8px 16px; }
+.is-projecting #splitLayout { height: 100%; }
+.is-projecting .split__mid { height: 100%; min-height: 0; }
+.is-projecting .soundPanel { display: flex; flex-direction: column; height: 100%; margin: 0; padding-bottom: 8px; }
+.is-projecting .soundPanel .panel__headerRow { display: none; }
+.is-projecting .soundPanel .panel__subtitle { margin: 0; text-align: center; }
+.is-projecting .soundBody { flex: 1; min-height: 0; padding: 8px; }
+.is-projecting .trafficLight { width: auto; padding: 10px 18px; gap: 10px; }
+.is-projecting .light { width: min(20vh, 42vw); height: min(20vh, 42vw); width: min(20dvh, calc((100dvh - 210px) / 3), 42vw); height: min(20dvh, calc((100dvh - 210px) / 3), 42vw); }
