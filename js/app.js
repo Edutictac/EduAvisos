@@ -2791,9 +2791,10 @@ const SOUND_KEY = "edunotas_sound_v1";
 const SOUND_PRESETS = {
   // Nota: valores en dBFS (negativos). Más cerca de 0 => más fuerte.
   // Calibrado para que en silencio quede en VERDE y en aula sea fácil ver ÁMBAR/ROJO.
-  strict: { greenMaxDb: -25, redMinDb: -15 },
-  normal: { greenMaxDb: -20, redMinDb: -10 },
-  permissive: { greenMaxDb: -16, redMinDb: -7 },
+  // Misma escala que dbToLevel: (100 + dBFS) * 1.4.
+  strict: { greenMaxDb: 70 / 1.4 - 100, redMinDb: 80 / 1.4 - 100 },
+  normal: { greenMaxDb: 80 / 1.4 - 100, redMinDb: 90 / 1.4 - 100 },
+  permissive: { greenMaxDb: 85 / 1.4 - 100, redMinDb: 95 / 1.4 - 100 },
 };
 
 /** @typedef {{ preset?: "strict"|"normal"|"permissive", greenMaxDb?: number, redMinDb?: number }} SoundUiState */
@@ -2836,6 +2837,17 @@ function loadSoundUiState() {
     const okPreset =
       preset === "strict" || preset === "normal" || preset === "permissive" || preset === "custom" ? preset : "normal";
 
+    // Actualiza únicamente los presets antiguos sin ajustes manuales.
+    const legacyPresets = {
+      strict: { greenMaxDb: -25, redMinDb: -15 },
+      normal: { greenMaxDb: -20, redMinDb: -10 },
+      permissive: { greenMaxDb: -16, redMinDb: -7 },
+    };
+    const legacy = legacyPresets[okPreset];
+    if (legacy && Number(parsed.greenMaxDb) === legacy.greenMaxDb && Number(parsed.redMinDb) === legacy.redMinDb) {
+      parsed.greenMaxDb = SOUND_PRESETS[okPreset].greenMaxDb;
+      parsed.redMinDb = SOUND_PRESETS[okPreset].redMinDb;
+    }
     const g = Number(parsed.greenMaxDb);
     const r = Number(parsed.redMinDb);
     const greenMaxDb = Number.isFinite(g) ? g : SOUND_PRESETS[okPreset].greenMaxDb;
@@ -3208,6 +3220,8 @@ function initSoundSemaphore() {
       tick();
     } catch (e) {
       const msg = e instanceof Error ? e.message : t("sound.error.activate");
+      // Libera los recursos para permitir reintentar tras conceder permiso.
+      await disableMic();
       setSoundStatus("sound.error.activateWithMsg", { msg });
       enableBtn.disabled = false;
       enableBtn.textContent = t("sound.button.enable");
