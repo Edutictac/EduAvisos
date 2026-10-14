@@ -36,16 +36,7 @@
         <div class="brand"><h1 class="title" data-i18n="app.title">Semàfor</h1><p class="brand__subtitle" data-i18n="app.subtitle">Un semàfor per cuidar el soroll de l’aula</p><button id="soundEnableBtn" class="btn micStart" type="button" aria-pressed="false" data-i18n="sound.button.enable">🎙 Activar micròfon</button></div>
         <div class="controls">
           <button id="projectSemaphoreBtn" class="btn" type="button" aria-pressed="false" data-i18n="app.project">Projectar el semàfor</button>
-          <div class="viewToggles" aria-label="Vista" data-i18n-attr="aria-label:app.view">
-            <span class="field__label" data-i18n="app.view">Vista</span>
-            <div class="viewToggles__buttons" role="group" aria-label="Mostrar u ocultar columnas" data-i18n-attr="aria-label:app.view.toggles">
-              <button id="toggleLeftColBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.students">Alumnos</button>
-              <button id="toggleMidColBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.semaphore">Semáforo</button>
-              <button id="toggleEvalPanelBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.evaluation">Evaluación</button>
-              <button id="toggleRightColBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.mode">Modo</button>
-            </div>
-          </div>
-
+          <div id="classTools" class="classTools" hidden>
           <label class="field">
             <span class="field__label" data-i18n="app.class">Clase</span>
             <select id="classSelect" class="field__input" aria-label="Seleccionar clase" data-i18n-attr="aria-label:app.class.select"></select>
@@ -55,6 +46,8 @@
 
           <button id="quickExportBtn" class="btn btn--secondary" type="button" data-i18n="app.export">Exportar</button>
 
+          </div>
+
           <button id="installAppBtn" class="btn btn--secondary iconBtn" type="button" hidden aria-label="Instalar aplicación" title="Instalar app" data-i18n-attr="aria-label:app.install|title:app.install.title">⬇︎</button>
 
           <button id="openImportBtn" class="btn iconBtn" type="button" aria-label="Abrir configuración" title="Configuración" data-i18n-attr="aria-label:app.settings.open|title:app.settings.title">⚙︎</button>
@@ -62,14 +55,23 @@
       </div>
     </header>
 
-    <main class="container container--fluid">
-      <div id="splitLayout" class="split">
-        <div class="split__left">
       <dialog id="importDialog" class="modal" aria-labelledby="importDialogTitle">
         <div class="modal__header">
           <h3 id="importDialogTitle" class="modal__title" data-i18n="config.title">Configuración</h3>
           <button id="closeImportBtn" class="btn btn--secondary" type="button" data-i18n="action.close">Cerrar</button>
         </div>
+
+        <p class="modal__subtitle" data-i18n="config.panels.hint">Activa Alumnat o Avaluació si necessites estes eines. La tria es guarda en este navegador.</p>
+          <div class="viewToggles" aria-label="Vista" data-i18n-attr="aria-label:app.view">
+            <span class="field__label" data-i18n="app.view">Vista</span>
+            <div class="viewToggles__buttons" role="group" aria-label="Mostrar u ocultar columnas" data-i18n-attr="aria-label:app.view.toggles">
+              <button id="toggleLeftColBtn" class="btn btn--secondary" type="button" aria-pressed="false" data-i18n="app.students">Alumnos</button>
+              <button id="toggleMidColBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.semaphore">Semáforo</button>
+              <button id="toggleEvalPanelBtn" class="btn btn--secondary" type="button" aria-pressed="false" data-i18n="app.evaluation">Evaluación</button>
+              <button id="toggleRightColBtn" class="btn btn--secondary" type="button" aria-pressed="true" data-i18n="app.mode">Modo</button>
+            </div>
+          </div>
+
 
         <div class="config">
           <div class="config__row">
@@ -209,6 +211,10 @@ María García" data-i18n-attr="placeholder:config.importPaste.placeholder"></te
         </ol>
       </dialog>
 
+
+    <main class="container container--fluid">
+      <div id="splitLayout" class="split split--hide-left split--hide-eval">
+        <div class="split__left">
       <section class="panel" aria-labelledby="listTitle">
         <div class="panel__header">
           <div class="panel__headerRow">

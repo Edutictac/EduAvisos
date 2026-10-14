@@ -3509,7 +3509,8 @@ function initWorkModePanel() {
 // Visibilidad de columnas (3 columnas)
 // ------------------------------
 
-const COLVIS_KEY = "edunotas_columns_v1";
+// Nueva vista inicial: Semàfor y Mode. Las opciones anteriores no activan herramientas opcionales.
+const COLVIS_KEY = "edunotas_columns_v2";
 const COLW_KEY = "edunotas_colwidth_v1";
 
 function initColumnVisibility() {
@@ -3523,7 +3524,7 @@ function initColumnVisibility() {
   if (!leftBtn || !midBtn || !evalBtn || !rightBtn) return;
 
   /** @type {{ left: boolean, mid: boolean, eval: boolean, mode: boolean }} */
-  let vis = { left: false, mid: true, eval: false, mode: false };
+  let vis = { left: false, mid: true, eval: false, mode: true };
 
   function load() {
     const raw = localStorage.getItem(COLVIS_KEY);
@@ -3550,6 +3551,7 @@ function initColumnVisibility() {
 
   function apply() {
     const rightVisible = vis.eval || vis.mode;
+    document.getElementById("classTools").hidden = !(vis.left || vis.eval);
     split.classList.toggle("split--hide-left", !vis.left);
     split.classList.toggle("split--hide-mid", !vis.mid);
     split.classList.toggle("split--hide-right", !rightVisible);

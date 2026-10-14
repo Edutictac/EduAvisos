@@ -4,12 +4,13 @@
 
   const I18N = {
     es: {
+      "config.panels.hint": "Activa Alumnado o Evaluación si necesitas estas herramientas. La elección se guarda en este navegador.",
       "app.title": "Semàfor",
       "app.subtitle": "Un semáforo para cuidar el ruido del aula",
       "app.project": "Proyectar el semáforo",
       "app.view": "Vista",
       "app.view.toggles": "Mostrar u ocultar columnas",
-      "app.students": "Alumnos",
+      "app.students": "Alumnado",
       "app.semaphore": "Semáforo",
       "app.evaluation": "Evaluación",
       "app.mode": "Modo",
@@ -274,12 +275,13 @@
       "class.default": "Clase {index}"
     },
     ca: {
+      "config.panels.hint": "Activa Alumnat o Avaluació si necessites estes eines. La tria es guarda en este navegador.",
       "app.title": "Semàfor",
       "app.subtitle": "Un semàfor per cuidar el soroll de l’aula",
       "app.project": "Projectar el semàfor",
       "app.view": "Vista",
       "app.view.toggles": "Mostrar o amagar columnes",
-      "app.students": "Alumnes",
+      "app.students": "Alumnat",
       "app.semaphore": "Semàfor",
       "app.evaluation": "Avaluació",
       "app.mode": "Mode",
@@ -448,6 +450,7 @@
       "class.default": "Classe {index}"
     },
     en: {
+      "config.panels.hint": "Enable Students or Evaluation when you need these tools. Your choice is saved in this browser.",
       "app.title": "Semàfor",
       "app.subtitle": "A traffic light to manage classroom noise",
       "app.project": "Project traffic light",

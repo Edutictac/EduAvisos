@@ -21,7 +21,7 @@ Luego abre:
 
 ## Qué hace
 
-La app abre con el semáforo como vista principal. El botón «Proyectar el semáforo» muestra las luces en grande y oculta los ajustes; al desactivarlo recuperas la vista anterior. Las preferencias de vista existentes se respetan.
+La app abre con el semáforo y el modo de trabajo como vista principal. El botón «Proyectar el semáforo» muestra las luces en grande y oculta los ajustes; al desactivarlo recuperas la vista anterior. Alumnado y Evaluación se activan desde Configuración; la elección se guarda en el navegador.
 
 La app incluye:
 
@@ -133,7 +133,7 @@ A1 | Manté una actitud positiva. | Mantiene una actitud positiva.
 
 ## Visibilidad de paneles
 
-En la cabecera puedes mostrar u ocultar:
+En Configuración puedes mostrar u ocultar:
 
 - `Alumnos`
 - `Semáforo`
