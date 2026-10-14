@@ -1040,3 +1040,13 @@ body {
 .split--project .soundBody { min-height: 65vh; }
 .split--project .soundPanel .panel__subtitle { display: block; }
 #projectSemaphoreBtn[aria-pressed="true"] { background: var(--sound-green); color: #0b1020; }
+
+.brand { flex: 0 0 260px; }
+.micStart { width: 100%; margin-top: 14px; min-height: 56px; font-size: 18px; font-weight: 750; background: var(--sound-green); color: #0b1020; border: 2px solid transparent; }
+.micStart:hover { background: #48e895; }
+.micStart[aria-pressed="true"] { background: var(--btn); color: var(--text); border-color: var(--sound-green); }
+.micStart:disabled { opacity: 0.7; cursor: wait; }
+.studentTimer { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+@media (max-width: 720px) {
+  .brand { flex: initial; width: 100%; }
+}

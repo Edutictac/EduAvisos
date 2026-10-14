@@ -31,6 +31,8 @@ La app incluye:
 
 Todo funciona en local y se guarda en `localStorage`.
 
+El botón verde «Activar micròfon», bajo el nombre de la app, inicia el semáforo tras conceder permiso al micrófono. El temporizador de avisos está en el panel de alumnado y funciona por separado.
+
 ## Uso diario
 
 ### 1. Alumnado y clase

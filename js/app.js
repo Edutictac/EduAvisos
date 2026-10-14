@@ -3015,6 +3015,7 @@ function initSoundSemaphore() {
 
   function setPanelState(next) {
     currentState = next;
+    enableBtn.setAttribute("aria-pressed", String(next !== "off"));
     if (next === "off") {
       soundPanel.removeAttribute("data-sound-state");
     } else {
